@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CaptchaCreator.aspx.cs" Inherits="TestRippleCaptcha.CaptchaCreator" %>
