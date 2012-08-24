@@ -9,16 +9,20 @@ namespace TestRippleCaptcha
     public partial class TestPostback : System.Web.UI.Page
     {
 
+        
         private string CurrentCaptcha
         {
+            //存放在Session 中
             get { return Session["CAPTCHA"].ToString(); }
             set { Session["CAPTCHA"] = value; }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //如果只是postback 就不更新
             if (!IsPostBack)
             {
+                //取一個新的GUID 然後取MD5 因為GUID只有到F 並取四碼
                 CurrentCaptcha = FormsAuthentication.HashPasswordForStoringInConfigFile(Guid.NewGuid().ToString(), "MD5").Substring(0, 4);
                 Helper helper = new Helper();
                 var result = helper.GetCaptcha(CurrentCaptcha, "Verdana", Server.MapPath("bk.jpg"), 95, 65, 22, 2);
@@ -27,10 +31,15 @@ namespace TestRippleCaptcha
         }
 
 
-
+        /// <summary>
+        /// 更新按下時 充新換Key
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
 
+            ////取一個新的GUID 然後取MD5 因為GUID只有到F 並取四碼
             CurrentCaptcha = FormsAuthentication.HashPasswordForStoringInConfigFile(Guid.NewGuid().ToString(), "MD5").Substring(0, 4);
             Helper helper = new Helper();
             var result = helper.GetCaptcha(CurrentCaptcha, "Verdana", Server.MapPath("bk.jpg"), 95, 65, 22, 2);
@@ -91,8 +100,14 @@ namespace TestRippleCaptcha
 
         }
 
+        /// <summary>
+        /// 按下確認後認證
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnCheck_Click(object sender, EventArgs e)
         {
+            //印出來是否正確
             lblResult.Text = (CurrentCaptcha.ToUpper() == txtCaptcha.Text.Trim().ToUpper()).ToString() + CurrentCaptcha;
         }
 

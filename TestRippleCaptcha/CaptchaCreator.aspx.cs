@@ -19,7 +19,7 @@ namespace TestRippleCaptcha
         {
 
             
-            var md5 =
+            
             CurrentCaptcha = FormsAuthentication.HashPasswordForStoringInConfigFile(Guid.NewGuid().ToString(), "MD5").Substring(0, 4);
             Helper helper=new Helper();
 

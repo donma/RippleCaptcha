@@ -10,7 +10,7 @@ namespace TestRippleCaptcha
         }
         protected void btnCheck_Click(object sender, EventArgs e)
         {
-            lblResult.Text = (Session["CAPTCHA"].ToString().ToUpper() == txtCaptcha.Text.Trim().ToUpper()).ToString() + Session["CAPTCHA"].ToString().ToUpper();
+            lblResult.Text = (Session["CAPTCHA"].ToString().ToUpper() == txtCaptcha.Text.Trim().ToUpper()).ToString();
         }
     }
 }
